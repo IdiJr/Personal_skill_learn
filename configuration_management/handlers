@@ -1,0 +1,13 @@
+# handlers are used to trigger a state change in a service, such as a restart or stop.
+
+# look fairly similar to regular tasks, handlers are only executed when previously triggered from a notify directive in a task.
+
+# defined in array as handlers
+
+
+handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+    
+    - name: other handler
+      service: name=other state=restarted

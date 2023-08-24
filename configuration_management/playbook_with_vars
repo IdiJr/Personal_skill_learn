@@ -1,0 +1,14 @@
+# The simplest way to define variables in Ansible is using `vars` section of a playbook.
+
+# This example defines `package` that later is used inside a task
+
+# The `package` variable has a global scope, which makes it accessible from any point of the provisioning, even from included files and templates.
+
+---
+- hosts: all
+  become: true
+  vars:
+     package: vim
+  tasks:
+     - name:Install Package
+       apt: name={{ package }} state=latest

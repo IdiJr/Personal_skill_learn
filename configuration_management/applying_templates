@@ -1,0 +1,8 @@
+# The built-in module template is used to apply the template from a task.
+
+# this is how to apply templates in the vhost.tpl file to the Apache virtual host
+
+- name: Change default Apache virtual host
+  template: 
+    src: vhost.tpl
+    dest: /etc/apache2/sites-available/000-default.conf

@@ -1,0 +1,7 @@
+# The name directive here is important because it will be the unique identifier of this handler. To trigger this handler from a task, you should use the notify option
+
+- name: Change default Apache virtual host
+  template: 
+    src: vhost.tpl
+    dest: /etc/apache2/sites-available/000-default.conf
+  notify: restart apache

@@ -1,0 +1,10 @@
+# Task defines a single automated step that is executed by Ansible
+
+# The name part is optional, but recommended because it shows in the output when the task is executed
+
+# apt is a built-in Ansible module that abstracts management of packages on Debian-based distributions
+
+# The task in this example tell Ansible that the package Vim should have the latest version if not installed yet
+
+- name: This is a task
+  apt: name=vim state=latest

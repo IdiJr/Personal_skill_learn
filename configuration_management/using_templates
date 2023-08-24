@@ -1,0 +1,14 @@
+# Templates are typically used to set up configuration files, allowing for the use of variables and other features intended to make these files more versatile and reusable.
+
+# If you named the template file vhost.tpl, and you placed it in the same directory as your playbook, this is how you would apply the template to replace the default Apache virtual host
+
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot {{ doc_root }}
+
+    <Directory {{ doc_root }}>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

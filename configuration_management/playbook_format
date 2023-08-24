@@ -1,0 +1,15 @@
+# Playbooks are YAML files containing a series of directives to automate the provisioning of a server.
+
+# The following example is a simple playbook that perform two tasks: updates the apt cache and installs vim afterwards.
+
+# YAML relies on indentation to serialize data structures. For that reason, when writing playbooks and especially when copying examples, you need to be extra careful to maintain the correct indentation.
+
+--
+- host: all
+  become: true
+  tasks:
+     - name:Update apt-cache
+       apt: upate_cache=yes
+
+     - name: Install Vim
+       apt: name=Vim state=latest

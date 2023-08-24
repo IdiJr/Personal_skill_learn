@@ -1,0 +1,22 @@
+# This is Ansible 2.6 compatible
+
+# Also to run the playbook
+"ansible-playbook -i roles/common/tasks/main.yml"
+
+---
+- hosts: all
+  become: true #same as sudo up
+
+  vars:
+      packages: ["vim", "git", "curl"] 
+ #varables which in this case stores each package as an item within the array
+ #
+ #  tasks:
+ #      - name: installing packages on hosts 
+ #            apt: name={{ item }} update_cache=yes state=latest
+ #                  with_items: "{{ packages }}" #calls the var packages
+ #                  #but you can also call the pacakges in this manner
+ #                  #      with_items:
+ #                  #         - vim
+ #                  #         - git
+ #                  #         - curl # this is seen by ansible as "item": ["vim", "git", "curl"]

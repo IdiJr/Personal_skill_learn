@@ -1,0 +1,12 @@
+# This also works like the using_loops file but the items are defined in the 
+# `array` variable 
+
+---
+- hosts: all
+  become: true
+  vars:
+     Packages: [ 'Vim', 'git', 'curl' ]
+  tasks:
+     - name: Intall Package
+       apt: name={{ item }} state=latest
+       with_items: "{{ packages }}"

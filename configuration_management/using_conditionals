@@ -1,0 +1,10 @@
+# conditionals are used to decide dynamically if a task should execute
+# or not, based on a variable or output from a command.
+
+# The conditional when receives as argument an expression to be evaluated.
+
+# The task only gets executed in case the expression is evaluated to true.
+
+- name: Shutdown Debian Based Systems
+  command: /sbin/shutdown -t now
+  when: ansible_os_family == "Debian"

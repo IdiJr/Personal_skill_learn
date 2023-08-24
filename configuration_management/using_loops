@@ -1,0 +1,14 @@
+# Loops are used to repeat a task using diferent input values.
+
+# You can create a single task to install several packages with loops instead of repeating each installation.
+
+# To create a loop within a task, use the `wit_item` option with an aray of values.
+
+# The contents of the loop can be accessed through the variable `item`
+
+- name: Install Packages
+  apt: name={{ item }} state=latest
+  with_items:
+     - vim
+     - git
+     - curl

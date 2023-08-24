@@ -1,0 +1,21 @@
+# This shows two conditional tasks based on the output from a php -v command.
+
+# We will test for the exit status of the command, since we know it will fail to execute in case PHP is not installed on this server.
+
+# The `ignore_errors` portion of the task is important to make sure the provisioning continues even when the command fails execution.
+
+# The debug module used here is a useful module for showing contents of variables or debug messages. It can either print a string (when using the msg argument) or print the contents of a variable (when using the var argument).
+
+
+- name: Check if PHP is installed
+  register: php_installed
+  command: php -v
+  ignore_errors: true
+
+- name: This task is only executed if PHP is installed
+  debug: var=php_install
+  when: php_installed|success
+  
+- name: This task is only executed if PHP is NOT installed
+  debug: msg='PHP is NOT installed'
+  when: php_installed|failed
