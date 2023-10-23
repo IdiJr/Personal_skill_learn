@@ -13,18 +13,22 @@ sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Overwrites the contents of /redirect_me. Redirects to my github page
-echo "https:\/\/github.com\/IdiJr" | sudo tee /var/www/html/redirect_me
-redirection_url="https:\/\/github.com\/IdiJr"
-string_for_replacement="server_name _;\n\trewrite ^\/redirect_me $redirection_url permanent;"
-sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+echo "https://github.com/IdiJr" | sudo tee /var/www/html/redirect_me
 
-# Creates a custom 404 page
+new_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/IdiJr permanent;"
+sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
+
+# Creating a 404 Custom error page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-replacement_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html; \n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$replacement_string/" /etc/nginx/sites-enabled/default
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+
+# Testing configurations for syntax errors
+sudo nginx -t
 
 # creates a custom HTTP response header
-sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+sudo sed -i "/server_name _/\ta add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
 # Setup the Nginx server to listen to port 80
 # Creates a link between sites-available and sites-enabled
