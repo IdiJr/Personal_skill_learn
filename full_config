@@ -28,7 +28,7 @@ sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/
 sudo nginx -t
 
 # creates a custom HTTP response header
-sudo sed -i "/server_name _/\ta add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+sudo sed -i "/server_name _/a \tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
 # Setup the Nginx server to listen to port 80
 # Creates a link between sites-available and sites-enabled
