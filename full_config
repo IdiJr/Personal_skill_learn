@@ -75,4 +75,4 @@ sudo ufw allow 22/tcp
 sudo ufw default deny incoming
 
 # Enable ufw after configurations
-sudo ufw -y enable
+sudo ufw enable
