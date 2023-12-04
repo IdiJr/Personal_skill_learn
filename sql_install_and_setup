@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Installs mysql version 5.7.*
+# COPY AND PASTE THE FOLLOWING INSTRUCTIONS WHERE YOU CAN REFERENCE
+# AND EXECUTE WHEN NEEDED:
+# 1. In the prompt, choose the Ubuntu Bionic. And then select the MySQL Server & Cluster option. After that, choose mysql-5.7 and then select ok.
+# 2. Press the Y key to start the installation and set the root password when prompted.
+# 3. Enter your MySQL root password and answer all of the security questions.
+
+
+#udates and upgrades packages
+sudo apt update && sudo apt upgrade -y
+
+# Auto removal of unused/unwanted dependancies
+sudo apt autoremove
+
+# Add MySQL 5.7 APT Repository
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb
+
+# Once it's downloaded, install the repository
+sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
+
+# update the APT repository
+sudo apt update
+
+# import the missing gpg key with the following command
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
+
+# update the APT repository
+sudo apt update
+
+# Install MySQL 5.7
+sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+# Secure MySQL 5.7 Installation
+sudo mysql_secure_installation
+
+echo "Congratulation, you have successfully installed MySQL 5.7 on your Ubuntu 20.04 server"
